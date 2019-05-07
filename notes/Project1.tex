@@ -1,0 +1,53 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+
+\author{Zach Neveu}
+\title{ Project 1: Knapsack and Graph Coloring }
+
+\begin{document}
+\maketitle
+
+\section{Knapsack}%
+\label{sec:knapsack}
+
+Due: Monday 5/13 \\
+
+Given: Knapsack Instance \\
+8	<- \# of objects \\
+1639	<- \# Size bound \\
+0 22 27 <- number, value, size \\
+
+\begin{itemize}
+	\item Within given time, find best soln. on your computer
+	\item Write function exhaustiveKnapsack(Knapsack \&K, int t)
+	\item Use given code to read from files
+	\item Write code to exhaustively run knapsack search
+	\item Classes for items - use \verb|select| functions to select items
+	\item Use \verb|printSolution()| to dump results of knapsack once optimal found
+	\item Submit \verb|resultsX.txt| with results
+	\item Ok to compare results with other groups
+	\item 20-30 instances to solve, 10 mins per piece
+	\item Knapsack is the easy part, get this done!
+	\item Just use brute force
+\end{itemize}
+
+\section{Graph Coloring}%
+\label{sec:graph_coloring}
+\begin{itemize}
+	\item Idea: Map of USA, adjacent states can't be same color. How many colors needed? If colors are fixed, what is lowest \# of conflicts?
+	\item This part will take longer
+\end{itemize}
+
+
+\end{document}
