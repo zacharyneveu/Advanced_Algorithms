@@ -1,12 +1,17 @@
 #Reading
 
+## Legend
+- [ ] TODO
+- [x] DONE
+- [~x] IN PROGRESS
+
 * Introduction
 - [x] Law. 1-15 (intro)
 - [x] Gar. 1-12 (intro)
 - [x] Cor. 15-27 (algorithm analysis)
 
 * Complexity
-- [ ] Cor. 966-979 (introduction)
+- [~x] Cor. 966-979 (introduction)
 - [ ] Cor. 979-982 (P and NP)
 - [ ] Cor. 984-986 (NP completeness)
 
