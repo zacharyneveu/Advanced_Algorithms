@@ -1,0 +1,71 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-4em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\lhead{ECE 4542: Advanced Engineering Algorithms}
+\rhead{Waleed Meleis}
+\pagestyle{fancy}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+
+\author{Zach Neveu}
+\title{ Homework 1 }
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{enumerate}
+	\item Bubble Sort
+	\begin{enumerate}
+		\item Best-case running time: If the list is already sorted, Bubble Sort only requires a single pass, or $O(n)$ time to verify this.
+		\item Worst-case running time: If the list is reverse-sorted, then every item will need to be swapped on each pass, which makes the worst case runtime $O(n^2)$
+	\end{enumerate}
+	\item Sequential Search
+	\begin{enumerate}
+		\item Best case running time: Desired item is first in array, leading to a runtime of $O(1)$
+		\item Worst case running time: Desired item is last in array, leading to a runtime of $O(n)$
+	\end{enumerate}
+	\item Proofs
+	\begin{enumerate}
+		\item \textbf{True}: $f(n) = O(g(n))$ means that $f(n)$ is upper-bounded by $g(n)$. Likewise, $g(n) = O(h(n))$ means that $g(n)$ is upper-bounded by $h(n)$. By the transitive property, $f(n) \le g(n) \le h(n)$, so $f(n) = O(h(n))$.
+		\item \textbf{False}: If $f(n)$ is linear search (worst case runtime $O(n)$) and $g(n)$ is bubble sort (worst case runtime $O(n^2)$), then $f(n) = O(g(n))$, but $g(n) \ne O(f(n))$
+	\end{enumerate}
+	\item Optimization vs. Decision Problems
+	\begin{enumerate}
+		\item Minimum Spanning Tree in a weighted graph
+		\begin{itemize}
+			\item Decision: Given a weighted graph, determine whether a spanning tree exists for which the sum of the weights of the included edges is less than $k$.
+			\item Optimization: Given a weighted graph, find the spanning tree which minimized the sum of the weights of the included edges.
+		\end{itemize}
+		\item Maximum Matching in a Graph
+		\begin{itemize}
+			\item Decision: Given a graph, determine whether a matching exists which contains at least $k$ nodes.
+			\item Optimization: Given a graph, find the matching containing the largest number of nodes possible.
+		\end{itemize}
+		\item Shortest Path
+		\begin{itemize}
+			\item Decision: Given two vertices in a weighted graph, determine whether a path between them exists for which the sum of the included edge weights is less thank $k$.
+			\item Optimization: Given two vertices of a weighted graph, find the path between them which has the smallest sum of included edge weights.
+		\end{itemize}
+	\end{enumerate}
+	\item Definitions
+	\begin{enumerate}
+		\item Heuristic: An approximate method of solving a problem which is not guaranteed to find an optimal solution
+		\item Polynomial-time algorithm: An algorithm whos runtime grows as a polynomial function of the instance size
+		\item Intractable Problem: A problem which provably cannot be solved by any polynomial-time algorithm.
+		\item Complexity class P: All problems which can be solved by a polynomial-time algorithm.
+	\end{enumerate}
+\end{enumerate}
+\end{document}
