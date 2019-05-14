@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Solution}
+\PYG{c+c1}{\PYGZsh{} a[i] is most recently selected activity}
+\PYG{c+c1}{\PYGZsh{} a[m] activity we are considering adding}
+\PYG{k}{def} \PYG{n+nf}{activitySelection}\PYG{p}{(}\PYG{n}{a}\PYG{p}{):}
+  \PYG{n}{sortByIncreaseFinish}\PYG{p}{(}\PYG{n}{a}\PYG{p}{)}
+  \PYG{n}{n} \PYG{o}{=} \PYG{n}{number} \PYG{n}{of} \PYG{n}{Activities}
+  \PYG{n}{A} \PYG{o}{=} \PYG{n}{a}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{c+c1}{\PYGZsh{} first activity}
+  \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}
+  \PYG{k}{for} \PYG{n}{m} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{n}\PYG{p}{):}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{conflict}\PYG{p}{(}\PYG{n}{a}\PYG{p}{[}\PYG{n}{m}\PYG{p}{],} \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]):}
+      \PYG{n}{A} \PYG{o}{+=} \PYG{n}{a}\PYG{p}{[}\PYG{n}{m}\PYG{p}{]}
+      \PYG{n}{i} \PYG{o}{=} \PYG{n}{m}
+  \PYG{k}{return} \PYG{n}{A}
+\end{Verbatim}

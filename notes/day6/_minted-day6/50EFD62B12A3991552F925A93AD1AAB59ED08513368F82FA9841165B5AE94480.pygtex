@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k}{def} \PYG{n+nf}{MST}\PYG{p}{():}
+  \PYG{n}{A}\PYG{o}{=}\PYG{l+m+mi}{0}
+  \PYG{k}{while} \PYG{n}{A} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n}{spanning} \PYG{n}{tree}\PYG{p}{:}
+    \PYG{n}{find} \PYG{n+nb}{next} \PYG{n}{edge} \PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{)} \PYG{o+ow}{in} \PYG{n}{increasing} \PYG{n}{order} \PYG{n}{by} \PYG{n}{weight} \PYG{n}{such} \PYG{n}{that} \PYG{p}{(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{)} \PYG{o+ow}{is} \PYG{n}{safe} \PYG{k}{for} \PYG{n}{A}
+    \PYG{n}{A} \PYG{o}{+=} \PYG{p}{\PYGZob{}(}\PYG{n}{u}\PYG{p}{,}\PYG{n}{v}\PYG{p}{)\PYGZcb{}}
+  \PYG{k}{return} \PYG{n}{A}
+\end{Verbatim}

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Algorithm 2}
+\PYG{c+c1}{\PYGZsh{} Version of \PYGZdq{}Generic Greedy Algorithm\PYGZdq{}}
+\PYG{k}{def} \PYG{n+nf}{headPartition2}\PYG{p}{(}\PYG{n}{g}\PYG{p}{):}
+  \PYG{n}{edge\PYGZus{}group} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+  \PYG{k}{for} \PYG{n}{arc} \PYG{o+ow}{in} \PYG{n}{g}\PYG{o}{.}\PYG{n}{edges}\PYG{p}{:}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{conflict}\PYG{p}{(}\PYG{n}{arc}\PYG{p}{,} \PYG{n}{edge\PYGZus{}group}\PYG{p}{):}
+      \PYG{n}{edge\PYGZus{}group} \PYG{o}{+=} \PYG{n}{arc}
+\end{Verbatim}
