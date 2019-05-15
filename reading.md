@@ -12,13 +12,13 @@
 
 * Complexity
 - [x] Cor. 966-979 (introduction)
-- [~x] Cor. 979-982 (P and NP)
-- [ ] Cor. 984-986 (NP completeness)
+- [x] Cor. 979-982 (P and NP)
+- [x] Cor. 984-986 (NP completeness)
 
 * Greedy algorithms
-- [ ] Cor. 370-371 (greedy algorithms)
-- [ ] Cor. 376-379 (greedy algorithms)
-- [ ] Pap. 218-224 (matching, bipartite matching)
+- [x] Cor. 370-371 (greedy algorithms)
+- [x] Cor. 376-379 (greedy algorithms)
+- [~x] Pap. 218-224 (matching, bipartite matching)
 
 * Linear programming
 - [ ] Cor. 770-777 (introduction and formulation)
