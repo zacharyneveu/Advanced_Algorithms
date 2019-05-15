@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{generalGreedy}\PYG{p}{(}\PYG{n}{g}\PYG{p}{):}
+  \PYG{n}{sort}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{edges}\PYG{p}{)}
+  \PYG{n}{soln} \PYG{o}{=} \PYG{p}{\PYGZob{}\PYGZcb{}}
+  \PYG{k}{for} \PYG{n}{edge} \PYG{o+ow}{in} \PYG{n}{g}\PYG{o}{.}\PYG{n}{edges}\PYG{p}{:}
+    \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{conflicts}\PYG{p}{(}\PYG{n}{edge}\PYG{p}{,} \PYG{n}{soln}\PYG{p}{)}
+    \PYG{n}{soln} \PYG{o}{+=} \PYG{n}{edge}
+\end{Verbatim}
