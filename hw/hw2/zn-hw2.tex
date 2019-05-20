@@ -1,0 +1,65 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\lhead{ECE 4542: Advanced Engineering Algorithms}
+\rhead{Zach Neveu}
+\pagestyle{fancy}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\title{ Homework 2 }
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\begin{enumerate}
+\item Definitions
+\begin{enumerate}
+\item The Complexity Class NPC: The set of all problems in NP for which every problem in NP is reducible to each of these problems.
+\item Reduction: A problem, $\alpha$ is reducible to another problem $\beta$ if an instance of $\alpha$ can be converted to an instance of $\beta$ in polynomial-time such that the instances of $\alpha$ and $\beta$ will have identical decisions.
+\end{enumerate}
+\item NP Membership
+\begin{enumerate}
+\item TSP decision problem: in NP because given a candidate cycle and cost, it can be verified in polynomial-time.
+\item \# of tours with cost $\le k = 1000000$ : Not in NP. Say the certificate was 1 million tours, it would be possible to verify that each tour is valid, however verifying that more tours do not exist is not possible using known polynomial-time algorithms.
+\item  tours with cost $\le k \ge 1000000$: In NP. A \textbf{yes} instance is verifiable in polynomial-time, by simply verifying that each of the 1000000+ tours found has cost $\le k$.
+\item $N^{th}$-shortest tour $\le k$: In NP. Proving that the $N^{th}$ tour has cost $\le k$ does not necessarily involve finding all $N$ cheapest tours. For a \textbf{yes} instance, a certificate consisting of $N$ tours, the greatest of which has cost $\le k$ would suffice.
+\item $N^{th}$-shortest tour $\ge k$: Not in NP. Verifying a \textbf{yes} instance of this problem would require proving that more short tours do not exist, a task which has no known solution in polynomial-time.
+\end{enumerate}
+\item $HC \le TSP$
+ \begin{enumerate}
+	\item For TSP, set $k=\infty$. A graph with a Hamiltonian Cycle (a \textbf{yes} instance of HC) then also has a shortest Hamiltonian Cycle with cost $\le \infty$ (a \textbf{yes} instance of TSP).
+	\item A graph with no Hamiltonian Cycles (a \textbf{no} instance of HC) also has no shortest Hamiltonian Cycle with cost $\le \infty$ making it a \textbf{no} instance of TSP.
+\end{enumerate}
+\item $SP  \le SS$
+\begin{enumerate}
+	\item For Subset Sum, set the target size to $\frac{1}{2}$ the total size.
+	\item If a set can divided into two partitions with equal value, then the value of each must be $\frac{1}{2}$ the total value. This means that at least one subset exists with value equal to $\frac{1}{2}$ the total, meaning that a \textbf{yes} instance of SP is also a \textbf{yes} instance of SS
+	\item If a set has a subset with value $\frac{1}{2}$ of the total, then the remaining items also have the value $\frac{1}{2}$ the total value. This means that a \textbf{yes} instance of SS is also a \textbf{yes} instance of SP, completing the proof that $SP \le SS$.
+\end{enumerate}
+\item Informally, $A_1 \le A_2$ means that $A_2$ is harder than or equal to $A_1$. More formally, $A_1$ can be solved by performing a polynomial amount of work to transform it into an instance of $A_2$. If $A_1$ cannot be solved in polynomial-time, then transforming it then solving it will also be impossible in polynomial-time.
+\item If $A_1 \in NPC$, this means that all problems in $NP$ reduce to $A_1$. Reduction is transitive, so if $A_1 \le A_2$, this means that $NP \le A_2$. By definition, this makes $A_2$ part of NPC.
+\item If $A_1 \in NPC$ then $NP \le A_1$. Likewise if $A_2 \in NPC$, then $NP \le A_2$. Since $A_1,A_2 \in NP$, $A_1 \le A_2$ and $A_2 \le A_1$
+\item If $A_1 \in NPC$, then $NP \le A_1$. If also $A_1 \in P$, then $NP \in P$. Because $A_2 \in NP$, $A_2 \in P$.
+\item By the definition of NPC, all NPC problems are reducible to each other. This means that if a single NPC problem were solved in polynomial-time, all NPC problems would be solvable in polynomial-time. Thousands of NPC problems have been found, and not a single one has been solved in polynomial-time. This seems to indicate that $NPC \notin P$.
+\item The proof of this problem lies in showing that $\Pi' \le \Pi$. As  $\Pi'$ is a sub-problem of $\Pi$, this is trivial. The transformation from an instance of $\Pi'$ to an instance of $\Pi$ is not needed, as instances of $\Pi'$ are already instances of $\Pi$. By the definition of a sub-problem, a \textbf{yes} instance of $\Pi'$ will be a yes instance of $\Pi$, and a \textbf{no} instance of $\Pi'$ will be a \textbf{no} instance of $\Pi$. This proves that $\Pi' \le \Pi$. If $\Pi' \in NPC$, then $NP \le \Pi' \le \Pi$. This means that $NP \le \Pi$, which by the definition of NPC proves that  $\Pi \in NPC$.
+\end{enumerate}
+
+\end{document}
