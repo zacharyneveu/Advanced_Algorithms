@@ -1,0 +1,105 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 10 Notes }
+
+\begin{document}
+\maketitle
+
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item Quiz
+	\item LP Standard Form
+	\item More LP examples
+	\item Solving LP Problems
+\end{itemize}
+
+\section{LP Examples}%
+\label{sec:lp_examples}
+
+\subsection*{Personnel Scheduling Problem}
+\begin{itemize}
+	\item Goal: find an assignment of people to shifts such that enough people are working in each slot and total cost is minimized.
+	\item Objective function: $z = 170x_1+160x_2+175x_3+180x_4+195x_5$
+	\item Constraint example: $x_1+x_2 \ge 79$
+	\item Constraint form:  $\sum$ active shifts during period $\ge$ required personnel during period.
+	\item Following constraints for all time periods create many redundant constraints
+	\item \textbf{redundant constraint: } Constraint can be deleted without changing the solution to the LP
+	\item Solution to this problem: x=(48,31,39,43,15), z=30,610
+\end{itemize}
+\begin{table}[h]
+	\centering
+	\caption{Personnel Schedules}
+	\label{tab:schedule}
+	\begin{tabular}{|l|c|c|}
+	\hline
+	Shift & Time Range & Hourly Wage \$\\
+	\hline
+	1 & 6a-2p  & 170 \\
+	\hline
+	2 & 8a-4p  & 160 \\
+	\hline
+	3 & 12p-8p & 175 \\
+	\hline
+	4 & 4p-12a & 180 \\
+	\hline
+	5 & 10p-6a & 195 \\
+	\hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{People Required}
+	\label{tab:numpeople}
+	\begin{tabular}{|c|c|}
+	\hline
+	Shift & People Needed \\
+	\hline
+	6-8   & 48 \\
+	8-10  & 79 \\
+	10-12 & 65 \\
+	12-2  & 87 \\
+	2-4   & 64 \\
+	4-6   & 73 \\
+	6-8	  & 82 \\
+	8-10  & 43 \\
+	10-12 & 52 \\
+	12-6a & 15 \\
+	\hline
+	\end{tabular}
+\end{table}
+
+\section{LP Standard Form}%
+\label{sec:lp_standard_form}
+\begin{itemize}
+	\item Maximize $\sum_{j=1}^{n} c_jx_j$ subject to $ \sum_{j=1}^{n} a_{ij}x_j \le b_i, i=1:m$, $x_j \ge 0$
+	\item Always maximizing
+	\item Constraints always use $\le$
+	\item All variables $\ge 0$
+	\item Any LP problem can be rephrased into a standard form equivalent
+	\item \textbf{Equivalent:} Two LP formulations are equivalent if they are both maximizing and for every feasible solution in L there is a corresponding feasible solution in L' with the same objective  value and visa versa.
+	\item If $L$ is minimizing and $L'$ is maximizing, multiply objective function by $-1$ 
+	\item If not all variables are constrained by $\ge 0$ : create 2 positive variables and take their difference to get the unbounded value (e.g. $x_2 \rightarrow (x_2'-x_2'')$)
+	\item If equality used instead of inequality in constraint: Split into $\le$ and $\ge$ constraints, and flip $\ge$ one.
+\end{itemize}
+\end{document}

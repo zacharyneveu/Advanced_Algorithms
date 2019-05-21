@@ -50,7 +50,7 @@
 \section{NP Completeness Review}%
 \label{sec:np_completeness_review}
 
-\subsection*{To be in NP a problem, $L$, must:}
+\subsection*{To be in NPC, a problem, $L$, must:}
 \begin{itemize}
 	\item $L \in NP$
 	\item For every problem $L' \in NP$, $L' \le L$
@@ -78,7 +78,7 @@ Knapsack: given a set, $U$, a size $s(u)$ and a value  $v(u)$ for all $u \in U$,
  \item Claim: Partition $\le$ Knapsack
  \item Prove: Given an instance of Partition, show that we can produce an instance of knapsack with the same answer.
  \item Answer: Set $K=B=\frac{1}{2}\sum s(u)$.
- \item Idea: sandwich K & B such that knapsack will find same answer as partition
+ \item Idea: sandwich K \& B such that knapsack will find same answer as partition
  \item If Knapsack is yes instance, Partition will be yes instance
  \item If Partition is yes instance, Knapsack is yes instance
  \item If partition is NPC, Knapsack is NPC

@@ -13,8 +13,8 @@ Concatenates all class notes into a single pdf
 import sys, os
 from pathlib import Path
 
-fs = [str(fn) for fn in Path('.').glob('**/*.pdf')]
-fs = sorted(fs, key=lambda x: int(x.split('/')[0][3]))
+fs = [str(fn) for fn in Path('.').glob('day*/*.pdf')]
+fs = sorted(fs, key=lambda x: int(x.split('/')[0][3:]))
 of = "AdvancedAlgsNotes.pdf"
 args = fs
 args.insert(0, 'pdfunite')

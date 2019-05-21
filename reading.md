@@ -18,10 +18,10 @@
 * Greedy algorithms
 - [x] Cor. 370-371 (greedy algorithms)
 - [x] Cor. 376-379 (greedy algorithms)
-- [~x] Pap. 218-224 (matching, bipartite matching)
+- [x] Pap. 218-224 (matching, bipartite matching)
 
 * Linear programming
-- [ ] Cor. 770-777 (introduction and formulation)
+- [x] Cor. 770-777 (introduction and formulation)
 - [ ] Hil. 82-87 (Simplex)
 
 * Integer programming
