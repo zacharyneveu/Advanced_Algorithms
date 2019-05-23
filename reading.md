@@ -22,7 +22,7 @@
 
 * Linear programming
 - [x] Cor. 770-777 (introduction and formulation)
-- [ ] Hil. 82-87 (Simplex)
+- [x] Hil. 82-87 (Simplex)
 
 * Integer programming
 - [ ] Hil. 538-544 (introduction and formulation)

@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kd}{param} \PYG{n+nv}{N}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{;}
+\PYG{k+kd}{var} \PYG{n+nv}{x}\PYG{+w}{ }\PYG{p}{\PYGZob{}}i\PYG{+w}{ }\PYG{k+kr}{in}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{o}{..}N\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{};}
+\PYG{k+kd}{subject to} \PYG{n+nv}{C1}\PYG{p}{:}
+\PYG{+w}{    }x\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{o}{+}\PYG{l+m+mi}{3}\PYG{o}{*}x\PYG{p}{[}i\PYG{p}{]}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{  }\PYG{l+m+mi}{10}\PYG{p}{;}
+c2\PYG{p}{:}
+\PYG{+w}{    }\PYG{k+kr}{sum}\PYG{p}{\PYGZob{}}i\PYG{+w}{ }\PYG{k+kr}{in}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{o}{..}N\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }x\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}
+c3\PYG{+w}{ }\PYG{p}{\PYGZob{}}j\PYG{+w}{ }\PYG{k+kr}{in}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{o}{..}\PYG{l+m+mi}{10}\PYG{p}{\PYGZcb{}:}\PYG{+w}{ }x\PYG{p}{[}j\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }x\PYG{p}{[}j\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{];}
+\end{Verbatim}
