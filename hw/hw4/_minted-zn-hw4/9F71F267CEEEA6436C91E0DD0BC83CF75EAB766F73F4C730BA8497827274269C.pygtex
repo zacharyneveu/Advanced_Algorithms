@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Model File}
+\PYG{n}{var} \PYG{n}{x1} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{1}\PYG{p}{;}
+\PYG{n}{var} \PYG{n}{x2} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{n}{maximize} \PYG{n}{Z}\PYG{p}{:}
+    \PYG{l+m+mi}{4500}\PYG{o}{*}\PYG{n}{x1}\PYG{o}{+}\PYG{l+m+mi}{4500}\PYG{o}{*}\PYG{n}{x2}\PYG{p}{;}
+
+\PYG{n}{subject} \PYG{n}{to} \PYG{n}{c1}\PYG{p}{:}
+    \PYG{l+m+mi}{5000}\PYG{o}{*}\PYG{n}{x1}\PYG{o}{+}\PYG{l+m+mi}{4000}\PYG{o}{*}\PYG{n}{x2}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{6000}\PYG{p}{;}
+
+\PYG{n}{subject} \PYG{n}{to} \PYG{n}{c2}\PYG{p}{:}
+    \PYG{l+m+mi}{400}\PYG{o}{*}\PYG{n}{x1}\PYG{o}{+}\PYG{l+m+mi}{500}\PYG{o}{*}\PYG{n}{x2}\PYG{o}{\PYGZlt{}=}\PYG{l+m+mi}{600}\PYG{p}{;}
+
+\PYG{c+c1}{\PYGZsh{} Solution}
+\PYG{n}{MINOS} \PYG{l+m+mf}{5.51}\PYG{p}{:} \PYG{n}{optimal} \PYG{n}{solution} \PYG{n}{found}\PYG{o}{.}
+\PYG{l+m+mi}{3} \PYG{n}{iterations}\PYG{p}{,} \PYG{n}{objective} \PYG{l+m+mi}{6000}
+\PYG{n}{x1} \PYG{o}{=} \PYG{l+m+mf}{0.666667}
+\PYG{n}{x2} \PYG{o}{=} \PYG{l+m+mf}{0.666667}
+\end{Verbatim}

@@ -1,0 +1,4 @@
+model p1.mod;
+solve;
+display x1;
+display x2;
