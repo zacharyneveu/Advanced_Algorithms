@@ -1,0 +1,134 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 16 Notes }
+
+\begin{document}
+\maketitle
+
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item Knapsack branch and bound
+	\item Project \#4 Introduction
+	\item Intro to Dynamic Programming
+	\item Quiz Tomorrow
+	\item HW due Thursday 6/6
+	\item Project 4 due Monday 6/10
+	\item Quiz Feedback
+\end{itemize}
+
+\section{Knapsack Branch and Bound}%
+\label{sec:knapsack_branch_and_bound}
+\begin{itemize}
+	\item Recall example from last class
+	\item Key Ideas
+	\begin{itemize}
+		\item Branch on each item in knapsack
+		\item Estimate bound by filling remaining space with ratio of next highest item
+		\item This bound is somewhat loose - obviously not all items can be this good
+	\end{itemize}
+	\item Improved bound: Add available items, when item won't fit, include the largest fraction of it that will!
+	\item This is just like the LP bound on ILP!
+	\item This knapsack problem, where items can be partially included is called \textbf{Fractional Knapsack} 
+	\item Solving fractional knapsack gives tight bound on solving 0-1 knapsack.
+\end{itemize}
+
+\section{Project 4 Introduction}%
+\label{sec:project_4_introduction}
+\begin{itemize}
+	\item 2 Part project
+	\item Given header file for knapsack object
+	\item implement \texttt{Knapsack::bound()} which finds the improved bound above
+	\begin{itemize}
+		\item Beware special cases!
+	\end{itemize}
+	\item Implement \texttt{Knapsack::branchandbound()} searches for optimal solution using \texttt{bound()} 
+	\begin{itemize}
+		\item Decide how to branch on variables
+		\item Decide order to divide subproblems
+		\item Use knapsack object to store subproblems - each subproblem gets a knapsack
+		\item Use variable \texttt{num} to indicate how many variables have been fixed
+		\item Suggestion: use list structure (stl::deque) of subproblems. Choose item from deque, expand it, add new subproblems back to deque.
+		\item When feasible solns found keep track of the best one
+		\item 10 Minute limit
+	\end{itemize}
+\end{itemize}
+
+\section{Dynamic Programming}%
+\label{sec:dynamic_programming}
+\begin{itemize}
+	\item \textbf{Mysterious}
+	\item NOT related to dynamic memory stuff
+	\item Advanced algorithm design: make sure you are doing everything exactly once, not less, not more.
+	\item \textbf{Dynamic Programming} is about not duplicating work
+	\item Requires very specific properties. Rarely useful, but very good when it works.
+	\item Revolves around Multiplying N matrices \{a1, a2, a3, \ldots, aN\}
+	\item What order do multiplications go? For N=3, can use (A1*A2)A3 or A1(A2*A3).
+	\item Order doesn't effect result, but does effect work required!
+	\item Assume multiplying $pxq$ and $qxr$ matrices to get $pxr$.
+	\item Final result is computing $p*r$ values
+	\item Multiplications generally much slower than additions
+	\item $q$ products required to compute each entry of result
+	\item $pqr$ total products required - $n^3$ time, kinda slow
+\end{itemize}
+
+\begin{gather*}
+A_1 \rightarrow 10 x 100 \\
+A_2 \rightarrow 100 x 5 \\
+A_3 \rightarrow 5 x 50 \\
+(A_1A_2)A_3 \rightarrow (10*100*5)+(10*5*50) = 7500 \\
+A_1(A_2A_3) \rightarrow (100*5*50)+(10*100*50) = 75,000 \\
+\end{gather*}
+
+\begin{itemize}
+	\item One answer is 100x harder to get!!
+	\item How to minimize the work done?
+	\item Number of ways to compute - huge for large N
+	\item \textbf{Parenthesization} - number of ways to add parentheses to group values
+\end{itemize}
+
+\begin{gather*}
+A_1,A_2,A_3,A_4, \ldots, A_{n-1}, A_n \\
+p_0 x p_1, p_1 x p_2, p_2 x p_3, \ldots, p_{n-1} x p_n \\
+A_{i..j} = A_iA_{i+1}A_j \rightarrow \text{Partial Product}
+\end{gather*}
+
+\begin{itemize}
+	\item Assume an optimal parenthesization of some product has been found
+	\begin{enumerate}
+		\item There must be a final product to compute
+		\item Total cost of that optimal parenthesization = (cost to compute final product + price to compute LHS + price to compute RHS)
+		\item \textbf{Optimal Substructure Property}: Optimal parenthesization of entire problem must contain optimal parenthesizations of subproblems. If LHS+RHS+FP is optimal, then LHS \& RHS must both be optimal as well.
+	\end{enumerate}
+	\item Notation
+	\begin{itemize}
+		\item Let $m[i,j] = $ Minimum \# of multiplications needed to compute subproduct $A_{i..j}$ 
+		\item Looking for $m[1,n]$ eventually
+		\item Final multiplication:  $A_{i..k}*A_{k+1..j}$.
+		\item $m[i,j] = m[i,k] + m[k+1,j] + p_{i-1}p_kp_j$
+		\item Problem: optimal $k$ unknown\ldots
+		\item Try all values of k and pick the best! Only $O(n)$
+		\item $m[i,j] = 0 if (i == j)$, else $argmin_k(m[i,k]+m[k+1,j]+p_{i-1}p_kp_j) \\$
+	\end{itemize}
+\end{itemize}
+
+\end{document}

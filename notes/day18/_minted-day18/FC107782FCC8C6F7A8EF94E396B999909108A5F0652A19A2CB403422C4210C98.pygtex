@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Generic Local Search Algorithm}
+\PYG{n}{t} \PYG{o}{=} \PYG{n}{rand}\PYG{p}{(}\PYG{n}{F}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} random point in F}
+\PYG{k}{while} \PYG{n}{improve}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{n+nb+bp}{None}\PYG{p}{:}
+    \PYG{n}{t} \PYG{o}{=} \PYG{n}{improve}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{k}{return} \PYG{n}{t}
+\end{Verbatim}
