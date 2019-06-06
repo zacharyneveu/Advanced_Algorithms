@@ -25,8 +25,8 @@
 - [x] Hil. 82-87 (Simplex)
 
 * Integer programming
-- [ ] Hil. 538-544 (introduction and formulation)
-- [ ] Hil. 553-559 (branch and bound solution)
+- [x] Hil. 538-544 (introduction and formulation)
+- [x] Hil. 553-559 (branch and bound solution)
 - [ ] Bra. 312-317 (branch and bound examples)
 
 * Dynamic programming

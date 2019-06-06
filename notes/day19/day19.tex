@@ -1,0 +1,123 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 19 Notes }
+
+\begin{document}
+\maketitle
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item More intro to local search
+	\item Neighborhoods
+	\item Tabu search
+	\item Reading Assigned
+	\item Project due Monday
+	\item Quiz Tuesday
+\end{itemize}
+
+\section{Initial Solutions for Local Search}%
+\begin{itemize}
+	\item Eulerian-cycle based algorithm (Christofides Algorithm)
+	\item Gets pretty close to HKB
+\end{itemize}
+
+\section{Neighborhood Functions for TSP}%
+\begin{itemize}
+	\item A neighborhood function: select two edges to delete, then add edges to reconnect the cycle
+	\item Maps from one solution to a similar solution
+	\item Gets one neighbor. To get all neighbors, run this function on all pairs of edges.
+	\item $e\choose{2}$ total neighbors. Neighborhood called \textbf{2-opt} neighborhood
+	\item If current solution better than all 2-opt neighbors, it is a \textbf{2-optimal solution} 
+\end{itemize}
+
+\section{Local Search Algorithms}%
+\begin{itemize}
+	\item Init algorithm
+	\begin{itemize}
+		\item Random
+		\item Nearest Neighbor
+		\item Greedy
+	\end{itemize}
+	\item Steepest descent: Look at 2-opt neighborhood, best neighbor becomes current solution until solution is 2-optimal
+	\item Simple 2-opt helps answer so much!
+	\item 3-Opt: select 3 edges to delete, then add edges to reconnect the cycle. $O(n^{3})$ ways to disconnect, ~6 ways to put a broken cycle back together. MUCH bigger neighborhood. $O(n^{3})$ work for a single step of improvement.
+	\item 2-opt greedy: 4.9\%, 3-opt greedy: 3\%. Incremental improvement, but MUCH slower to run.
+	\item Local optima problem: These algorithms get permanently stuck in local optima.
+	\item Simplest solution: Repeatedly select random initialization and optimize from each starting point with 2-opt steepest descent.
+	\item Not a particularly a good use of time in practice.
+	\item Revised steepest descent: go to best neighbor, even if it's worse than current solution
+	\item This frequently gets caught in cycles. To fix, just don't go back to already visited solutions
+	\item Tabu list can contain a list of previously visited solutions
+	\item In Tabu search, we select a best neighbor that is not on the tabu list, even if it is worse than current solution. Keep track of champion solution. Stop based on time, time since champion found, improvement in sequential champions small etc.
+	\item Tabu list can actually be quite short, as few as $\approx10$ entries.
+\end{itemize}
+
+\begin{table}[h]
+	\centering
+	\caption{Initialization Performance}
+	\label{tab:label}
+	\begin{tabular}{|c|c|c|c|c|}
+	\hline
+	Algorithm & Initial Euclidean & 2-Opt & Non-Euclidean Initial & 2-Opt\\
+	\hline
+	Random & 2150 & 7.9 & 34500 & 290\\
+	\hline
+	Nearest Neighbor & 25 & 6.6 & 240 & 96\\
+	\hline
+	Greedy & 17.6 & 4.9 & 170 & 70\\
+	\hline
+	\end{tabular}
+\end{table}
+
+\section{Uniform Graph Partitioning}%
+\label{sec:uniform_graph_partitioning}
+\begin{itemize}
+	\item Given a graph $G=(V,E)$ with an even number of nodes n, and weighted edges, divide the graph into two groups of nodes with equal size such that the weight of the edges crossing the boundary is minimized.
+	\item Imagine there are two processors. Each node is a job, and the goal is to split the jobs onto the two processors such that each processor has the same amount of work and the amount of data sent between the processors is minimized.
+	\item Neighborhood function: Select a node from each partition and swap them. Equivalent to 2-opt in TSP.
+	\item What to put in the tabu list?
+	\begin{itemize}
+		\item Complete solutions. Obvious, and eliminates all cycles with length < 10. Huge amount of into in the queue.
+		\item Nodes that were recently moved. Prevents going directly backwards. Moves that are made must be left for awhile. Problem with this is it's really restrictive, eliminating possibly valid and good moves. More space efficient than full solutions by far.
+		\item Store direct pairs of nodes on tabu list. Each node from pair is eligible to be moved again, just not with each other. This is space efficient, and less restrictive. Cycles possible using intermediate variables.
+	\end{itemize}
+\end{itemize}
+
+\subsection*{Extensions to Tabu search}
+\begin{itemize}
+	\item Aspiration-level conditions: ignore the tabu list if a tabu neighbor would be a new champion solution.
+	\item \textbf{Intensification}: Focus on solutions that are very similar to previous good solutions. Say a lot of past champions have very similar characteristics. Try freezing these characteristics and focus on changing everything else.
+	\item \textbf{Diversification:} Focus on producing unique solutions different from all past solutions.
+	\item Solvers tend to go through phases of diversification then intensification and alternate
+\end{itemize}
+
+\subsection*{Effective Problem Modeling}
+\begin{itemize}
+	\item Graph Coloring - Minimize \# Colors
+	\item Neighborhood function: change the color of one node
+	\item This neighborhood function can have illegal neighbors, and so can also run into the problem of having no legal neighbors.
+	\item Almost all neighbors will have same objective value. We're in Kansas.
+	\item Solution is to change the problem. Instead of minimizing \# colors, minimize \# conflicts for given number.
+\end{itemize}
+
+
+\end{document}
