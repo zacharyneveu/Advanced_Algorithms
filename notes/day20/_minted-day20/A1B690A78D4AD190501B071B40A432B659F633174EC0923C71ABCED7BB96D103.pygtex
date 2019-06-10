@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} local search tabu search form}
+\PYG{n}{x} \PYG{o}{=} \PYG{n}{initial\PYGZus{}soln}\PYG{p}{()}
+\PYG{n}{xbest} \PYG{o}{=} \PYG{n}{x}
+\PYG{n}{k} \PYG{o}{=} \PYG{l+m+mi}{0}
+\PYG{k}{while} \PYG{n}{xxx}\PYG{p}{:}
+    \PYG{n}{xp} \PYG{o}{=} \PYG{n}{generate}\PYG{p}{(}\PYG{n}{N}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}
+
+    \PYG{c+c1}{\PYGZsh{} true if xp better than x}
+    \PYG{c+c1}{\PYGZsh{} also true if xp worse than x up to a point}
+    \PYG{k}{if} \PYG{n}{c}\PYG{p}{(}\PYG{n}{xp}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{c}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{t}\PYG{p}{(}\PYG{n}{k}\PYG{p}{)}
+        \PYG{n}{x} \PYG{o}{=} \PYG{n}{xp}
+        \PYG{k}{if} \PYG{n}{c}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{c}\PYG{p}{(}\PYG{n}{xp}\PYG{p}{)}
+            \PYG{n}{xbest} \PYG{o}{=} \PYG{n}{x}
+    \PYG{n}{k} \PYG{o}{+=} \PYG{l+m+mi}{1}
+\end{Verbatim}

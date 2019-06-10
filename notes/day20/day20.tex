@@ -1,0 +1,188 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 20 Notes }
+
+\begin{document}
+\maketitle
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item Recap of local search
+	\item Variable-depth search
+	\item Simulated Annealing
+	\item Quiz tomorrow
+	\item Project 4 recap
+\end{itemize}
+
+\section{Local Search Recap}%
+\begin{itemize}
+	\item Initial solution, made better by looking at neighbors
+	\item TABU search: pick best neighbor even if it is worse
+	\item Stop at time limit, when best answer stops getting better
+	\item Items in TABU list can just be changes that were made, not complete solutions
+	\item TABU list doesn't have to be very long to work
+	\item Aspiration Level conditions: break tabu list rules for really good solutions
+	\item Intensification/Diversification: alternate between searching for best in local area vs. moving to another area.
+\end{itemize}
+
+\section{Variable Depth Search}%
+\label{sec:variable_depth_search}
+\begin{itemize}
+	\item Consider uniform graph partitioning problem again.
+	\item Break a graph into groups with equal number of nodes
+	\item Minimize weight of inter-group edges
+	\item Size of neighborhood determines how similar neighbors are.
+	\item Larger neighborhood = fewer steps to optimum, slower steps
+	\item Smaller neighborhood = smaller steps to optimum, faster steps
+	\item Tradeoff between neighborhood sizes.
+	\item Consider a potential swap of (a,b)
+	\item Perform the swap, but mark it as ``tentative".
+	\item Swap \textbf{gain} $g(a,b)$: the decrease in cost function of making swap $(a,b)$
+	\item Put both a and b on tabu list: neither can be moved
+	\item Choose $(a,b)$ such that $g(a,b)$ is maximized (steepest descent)
+	\item Repeat until no swaps possible (all on tabu list)
+	\item Let cumulative gain $G(k) = \sum_{i=1}^{k} g(a_i,b_i)$ be the gain after $k$ swaps.
+	\item After $\frac{n}{2}$ swaps, partition is back where it started with all items flip-flopped
+	\item $G(k)$ has maximum at $k^{*}$ which is somewhere between $\{0,\frac{n}{2}\}$
+	\item Take the first $k^{*}$ steps to get the next neighbor
+	\item This neighborhood function allows the solver to take larger steps without requiring significantly longer steps
+	\item This is basis for Lin-Kernighan TSP
+\end{itemize}
+
+
+\section{Lin-Kernighan}%
+\label{sec:lin_kernighan}
+\begin{itemize}
+	\item 2-opt neighborhoods require $O(n^2)$ - too lengthy
+	\item Consider smaller neighborhood
+	\item Consider HCs as paths. Select an edge to delete. Reconnect end of path to first side of deleted edge. Essentially, take a suffix of the path and flip it. Only single way to reconnect, n ways to delete an edge, $O(n)$ neighborhood.
+	\item 2 tabu lists.
+	\begin{itemize}
+		\item First list: edges that are added. Once an edge is added, it cannot be deleted.
+		\item Second list: deleted edges. Once an edge is deleted, it cannot be added.
+	\end{itemize}
+	\item Use variable-depth search as optimization technique. Using tabu lists, make up to $\frac{n}{2}$ moves. Look find best out of these solutions and use it as the next solution.
+	\item Turns out this is really effective! Long standing TSP champion algorithm. 1-2\% from bound for Euclidean instances.
+	\item Key concepts used: restrictive tabu list, steepest descent, variable depth search, small neighborhood
+\end{itemize}
+
+\begin{minted}{Python}
+# Local search standard form (before tabu)
+def local_search():
+    x = initial_soln()
+    done = False
+    while not done:
+        xp = minimum(c(Neighbors(x))
+        if c(xp) < c(x):
+            x = xp
+        else
+            done = True
+\end{minted}
+
+\begin{minted}{Python}
+# local search tabu search form
+x = initial_soln()
+xbest = x
+k = 0
+while xxx:
+    xp = generate(N(x))
+
+    # true if xp better than x
+    # also true if xp worse than x up to a point
+    if c(xp) - c(x) < t(k)
+        x = xp
+        if c(x) < c(xp)
+            xbest = x
+    k += 1
+\end{minted}
+\begin{itemize}
+    \item If $t(k) = 0$, then this gets stuck in any local optimum
+    \item If $t(k) = \infty$, then first neighbor always visited
+    \item $t(k)$ controls tradeoff between finding optimum and exploring.
+    \item Start with large value of $t(k)$, anneal to reach small  $t(k)$ by the end.
+    \item $t(k) \ge t(k+1)$, $lim_{k\to \infty} t(k) = 0$. Threshold Accepting.
+\end{itemize}
+
+\section{Simulated Annealing}%
+\begin{itemize}
+    \item Instead of $t(k)$ having fixed value, we let $t(k)$ be a random variable > 0
+    \item Consider 
+    \[ 
+    p(N_i)=
+    \begin{cases}
+        1 & c(xp) \le c(x) \\
+        e^{\frac{c(x)-c(xp)}{d_k}} & c(xp) > c(x) \\
+    \end{cases}
+    \]
+    \item Better solutions always excepted
+    \item Worse potentially excepted. Worse solutions have smaller probability.
+    \item $d_k$ adjusts curve of falloff. Larger $d_k$ means higher chance of going to worse neighbors. Smaller $d_k$ means smaller chance of visiting worse neighbors.
+    \item $d_k$ varies with k. Can start large to diversify, then get smaller to intensify
+    \item \textbf{cooling schedule:} how fast does $d_k$ get smaller?
+    \item Name: from quantum physics, simulating particle motion. $d_k$ is temperature. Cooling schedule has very physical meaning here!
+\end{itemize}
+
+\subsection*{Simulated Annealing TSP}
+\begin{itemize}
+    \item SA1 algorithm
+    \item Neighborhood function: 2-opt
+    \item Set $d_0 \approx \infty$ - accept like 95\% of answers
+    \item set $d_k = d_{k-1}^{0.95}$ 
+    \item Temperature length: $N(N-1)$ - how long to spend at each temperature
+    \item Results (see \ref{tab:sa1}): SA1 slow! Can be improved greatly using 2-opt afterwords.
+    \item How to speed up?
+    \item Neighborhood pruning. Smaller neighborhood $\to$ faster annealing $\to$ faster result.
+    \begin{itemize}
+        \item Neighborhood: select a random edge to delete, select one of its 20 closest neighbors to delete. Then reconnect. This takes us from $0(n^2) \to O(n)$
+        \item Temp length = $\alpha * 20n$
+    \end{itemize}
+    \item Low-temperature start, and don't use random initial solution
+    \begin{itemize}
+        \item Start with good heuristic solution
+        \item Lower initial temperature
+        \item Speeds up search
+    \end{itemize}
+\end{itemize}
+
+\begin{table}[h]
+    \centering
+    \caption{SA1 Results: Size vs. Algorithm}
+    \label{tab:sa1}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    N= & 100 & 316 & 1000 \\
+    \hline
+    SA1 & 5.2(12.4s) & 4.1(188s) & 4.1(3170s) \\
+    \hline
+    SA1+2-opt & 3.4 &  3.7 & 4.0 \\
+    \hline
+    2-opt & 4.5(0.03s) & 4.8  (0.09s) & 4.9 (0.34s) \\
+    \hline
+    3-opt & 2.5(0.04s) & 2.5 (0.1s) & 3.1 (0.4s) \\
+    \hline
+    LK & 1.5(0.06) & 1.7(0.2) & 2.0(0.77s) \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\end{document}

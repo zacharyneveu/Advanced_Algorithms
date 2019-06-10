@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Local search standard form (before tabu)}
+\PYG{k}{def} \PYG{n+nf}{local\PYGZus{}search}\PYG{p}{():}
+    \PYG{n}{x} \PYG{o}{=} \PYG{n}{initial\PYGZus{}soln}\PYG{p}{()}
+    \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{False}
+    \PYG{k}{while} \PYG{o+ow}{not} \PYG{n}{done}\PYG{p}{:}
+        \PYG{n}{xp} \PYG{o}{=} \PYG{n}{minimum}\PYG{p}{(}\PYG{n}{c}\PYG{p}{(}\PYG{n}{Neighbors}\PYG{p}{(}\PYG{n}{x}\PYG{p}{))}
+        \PYG{k}{if} \PYG{n}{c}\PYG{p}{(}\PYG{n}{xp}\PYG{p}{)} \PYG{o}{\PYGZlt{}} \PYG{n}{c}\PYG{p}{(}\PYG{n}{x}\PYG{p}{):}
+            \PYG{n}{x} \PYG{o}{=} \PYG{n}{xp}
+        \PYG{k}{else}
+            \PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{True}
+\end{Verbatim}

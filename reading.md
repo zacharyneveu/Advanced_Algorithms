@@ -34,7 +34,7 @@
 - [ ] 
 
 * Local search
-- [ ] Aar 1-7 (introduction)
+- [x] Aar 1-7 (introduction)
 - [ ] Law 215-231 (TSP tour creation heuristics)
 - [ ] Aar 231-234 (heuristics, 2-Opt, 3-Opt)
 - [ ] Aar 234-241 (experimental results)
