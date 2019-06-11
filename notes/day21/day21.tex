@@ -1,0 +1,152 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 21 Notes }
+
+\begin{document}
+\maketitle
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item Quiz
+	\item Simulated Annealing
+	\item Genetic Algorithms
+	\item Reading
+	\item Next Quiz Monday
+	\item Homework Thursday
+\end{itemize}
+
+\section{Simulated Annealing}%
+\label{sec:simulated_annealing}
+\begin{itemize}
+	\item Review of details: probability of accepting solution. 1 if better, less than 1 if worse.
+	\item Results from last class: very slow, not awesome results
+	\item How to speed up?
+	\item Long time needed at each temperature
+	\item Smaller neighborhood lowers time needed at each temperature
+	\item Neighborhood pruning: lowers size of 2-opt neighborhood $O(n^2)\to O(n)$
+	\item Low-temp start with good initial solution - reduces number of steps needed in annealing 50\% of neighbors accepted initially instead of 95\%.
+	\item Low-temp start + neighborhood pruning $\to$ SA2
+	\item SA2 results in table \ref{tab:sa}
+	\item Still quite slow, but can beat LK given enough time
+	\item No bound needed, no gradient needed, very flexible algorithm
+	\item Further Variations of SA
+	\begin{itemize}
+		\item Adaptive scheduling technique: have temp lengths adapt to solution. For example, when champion solution isn't changing often, reduce the temperature.
+		\item Water level algorithms - instead of looking at relative goodness of neighboring solution compared to current solution, compare neighbor to a global threshold or "water level". Raise the water level over time to anneal. Idea: imagine tides here! The search is like a sandpiper, explores when tide goes out, then runs back to best solution when tide comes in.
+	\end{itemize}
+\end{itemize}
+
+\begin{table}[h]
+	\centering
+	\caption{Variants of SA and performance}
+	\label{tab:sa}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    N= & 100 & 316 & 1000 \\
+	\hline
+    SA1 & 5.2(12.4s) & 4.1(188s) & 4.1(3170s) \\
+    \hline
+    SA1+2-opt & 3.4 &  3.7 & 4.0 \\
+    \hline
+	SA2 $\alpha=10$ & 1.6 (14.3s) & 1.8 (50.35s)& 2.0 (2290s) \\
+	\hline
+	SA2 $\alpha=40$ & 1.3 (58s) & 1.5 (204)& 1.7 (80509s) \\
+	\hline
+	SA2 $\alpha=100$ & 1.1 (141s) & 1.3 (655s)& 1.6 (191000s) \\
+	\hline
+    2-opt & 4.5(0.03s) & 4.8  (0.09s) & 4.9 (0.34s) \\
+    \hline
+    3-opt & 2.5(0.04s) & 2.5 (0.1s) & 3.1 (0.4s) \\
+    \hline
+    LK & 1.5(0.06) & 1.7(0.2) & 2.0(0.77s) \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\section{Genetic Algorithms}%
+\begin{itemize}
+	\item Famous example of how nature has inspired algorithms
+	\item Includes local search, intensification/diversification, randomization, but does so in a unique way.
+	\item Idea: population of organisms. Pairs of organisms reproduce, individual organisms mutate, offspring share characteristics with parents, and rates of survival/reproduction tied to "fitness".
+	\item Translation to optimization
+	\begin{itemize}
+		\item Collection of solutions. This is different from other solvers!
+		\item Pairs of solutions produce new solutions
+		\item Individual solutions change
+		\item New solutions are similar to their parents
+		\item Survival and reproduction related to objective value
+	\end{itemize}
+\end{itemize}
+
+\begin{minted}{Python}
+# Genetic Agorithm
+pop = generate_pop()
+done = False
+while not done:
+    subs = select(subset(pop, size=[1,2]))
+    children = [mutate(x) for x in subs if x.size ==  1]
+    children += [crossover(x[0],x[1]) for x in subs if x.size ==  2]
+    survivors = find_survivors(children)
+return maximum([fitness(x) for x in survivors])
+\end{minted}
+
+\begin{itemize}
+    \item Required features
+    \begin{itemize}
+        \item Population size
+        \item How to select initial population
+        \item Mating strategy
+        \item Mutation strategy
+        \item Crossover strategy
+        \item Survival function
+    \end{itemize}
+    \item Initial population
+    \begin{itemize}
+        \item Heuristics for best solutions
+        \item Random
+        \item Should have some diversity
+    \end{itemize}
+    \item Mating Strategy
+    \begin{itemize}
+        \item Select randomly, in proportion to fitness
+    \end{itemize}
+    \item Mutation
+    \begin{itemize}
+        \item Solutions represented as string of digits, often bits.
+        \item Mutation, is pick a random bit and flip it
+        \item Can end up with unviable children not in F
+    \end{itemize}
+    \item Crossover
+    \begin{itemize}
+        \item Pick a crossover index in strings, choose first half of one, second half of the other
+        \item idea: why not flip a coin on each bit?
+        \item idea: what about probabilistic kind of truth table for each bit? i.e. if parents are both 1, child is 1 with p=0.99.
+    \end{itemize}
+    \item Selection
+    \begin{itemize}
+        \item Keep with probability proportional to fitness
+        \item Only keep offspring
+    \end{itemize}
+
+\end{itemize}
+\end{document}

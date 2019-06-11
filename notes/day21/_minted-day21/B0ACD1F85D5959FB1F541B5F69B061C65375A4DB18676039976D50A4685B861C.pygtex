@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Genetic Agorithm}
+\PYG{n}{pop} \PYG{o}{=} \PYG{n}{generate\PYGZus{}pop}\PYG{p}{()}
+\PYG{n}{done} \PYG{o}{=} \PYG{n+nb+bp}{False}
+\PYG{k}{while} \PYG{o+ow}{not} \PYG{n}{done}\PYG{p}{:}
+    \PYG{n}{subs} \PYG{o}{=} \PYG{n}{select}\PYG{p}{(}\PYG{n}{subset}\PYG{p}{(}\PYG{n}{pop}\PYG{p}{,} \PYG{n}{size}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{]))}
+    \PYG{n}{children} \PYG{o}{=} \PYG{p}{[}\PYG{n}{mutate}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{subs} \PYG{k}{if} \PYG{n}{x}\PYG{o}{.}\PYG{n}{size} \PYG{o}{==}  \PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{n}{children} \PYG{o}{+=} \PYG{p}{[}\PYG{n}{crossover}\PYG{p}{(}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],}\PYG{n}{x}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{])} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{subs} \PYG{k}{if} \PYG{n}{x}\PYG{o}{.}\PYG{n}{size} \PYG{o}{==}  \PYG{l+m+mi}{2}\PYG{p}{]}
+    \PYG{n}{survivors} \PYG{o}{=} \PYG{n}{find\PYGZus{}survivors}\PYG{p}{(}\PYG{n}{children}\PYG{p}{)}
+\PYG{k}{return} \PYG{n}{maximum}\PYG{p}{([}\PYG{n}{fitness}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{survivors}\PYG{p}{])}
+\end{Verbatim}
