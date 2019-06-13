@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Recursive Matrix Chain Multiply}
+\PYG{k}{def} \PYG{n+nf}{RecurseMatChain}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{):}
+    \PYG{k}{if} \PYG{n}{i} \PYG{o}{==} \PYG{n}{j}\PYG{p}{:}
+        \PYG{k}{return} \PYG{l+m+mi}{0}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{m}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{MAX\PYGZus{}INT} \PYG{c+c1}{\PYGZsh{} set to infinity}
+        \PYG{k}{for} \PYG{n}{k} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{):}
+            \PYG{n}{q} \PYG{o}{=} \PYG{n}{RecurseMatChain}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{n}{i}\PYG{p}{,}\PYG{n}{k}\PYG{p}{)}\PYG{o}{+}\PYG{n}{RecurseMatChain}\PYG{p}{(}\PYG{n}{p}\PYG{p}{,}\PYG{n}{k}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}\PYG{o}{+}\PYG{n}{p}\PYG{p}{[}\PYG{n}{i}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{n}{p}\PYG{p}{[}\PYG{n}{k}\PYG{p}{]}\PYG{n}{p}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}
+            \PYG{k}{if} \PYG{n}{q} \PYG{o}{\PYGZlt{}} \PYG{n}{m}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]:}
+                \PYG{n}{m}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]} \PYG{o}{=} \PYG{n}{q}
+    \PYG{k}{return} \PYG{n}{m}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{]}
+\end{Verbatim}
