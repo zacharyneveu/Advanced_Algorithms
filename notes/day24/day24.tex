@@ -1,0 +1,60 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 24 Notes }
+
+\begin{document}
+\maketitle
+\section{Agenda}%
+\label{sec:agenda}
+\begin{itemize}
+	\item Quiz
+	\item Max-Flow Review
+	\item Max-Flow Min-cut theorem
+\end{itemize}
+
+\section{Max-Flow Review}%
+\label{sec:max_flow_review}
+\begin{itemize}
+	\item Ford-Fulkerson - while an augmenting path exists, add flow to it
+	\item How do we know this is optimal?
+	\item \textbf{cut}: a slice across a flow-network dividing the network into two parts with the source and sink on opposite sides (s,t). Capacity of a cut is $c(s,t)$ which is the net flow across the cut from the source to the sink.
+	\item Flow over a cut can't be larger than capacity of cut.
+	\item Overall flow limited by minimum cut.
+	\item Hypothetically, if we found a max flow, there will be no augmenting path.
+	\item If the flow has hit the capacity for some cut, then the capacity has been hit.
+	\item If a max-flow has been found, then a cut through the residual capacity diagram exists where remaining capacity is 0.
+\end{itemize}
+
+\section{Ford-Fulkerson Efficiency}%
+\begin{itemize}
+	\item Number of iterations needed upper-bounded by value of max flow (flow increases at least 1 on every iter)
+	\item Overall efficiency: $O(Ef*)$. Depends on size of maximum flow
+	\item Other algorithms
+	\begin{itemize}
+	 	\item Edmonds-Karp: $O(VE^2)$
+		\item Also algorithms for $O(V^2E)$, $O(V^{3})$
+	\end{itemize}
+\end{itemize}
+
+
+\end{document}

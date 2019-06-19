@@ -30,16 +30,15 @@
 - [ ] Bra. 312-317 (branch and bound examples)
 
 * Dynamic programming
-- [ ] Cor. 331-338
-- [ ] 
+- [x] Cor. 331-338
 
 * Local search
 - [x] Aar 1-7 (introduction)
-- [ ] Law 215-231 (TSP tour creation heuristics)
-- [ ] Aar 231-234 (heuristics, 2-Opt, 3-Opt)
-- [ ] Aar 234-241 (experimental results)
-- [ ] Aar 249-254 (tabu search)
-- [ ] Aar 254-261 (Lin-Kernighan)
+- [x] Law 215-231 (TSP tour creation heuristics)
+- [x] Aar 231-234 (heuristics, 2-Opt, 3-Opt)
+- [x] Aar 234-241 (experimental results)
+- [x] Aar 249-254 (tabu search)
+- [x] Aar 254-261 (Lin-Kernighan)
 - [ ] Aar 261-273 (simulated annealing)
 - [ ] Aar 286-291 (genetic algorithms)
 - [ ] 

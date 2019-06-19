@@ -1,0 +1,65 @@
+% Geometry, font
+\documentclass[12pt, letter]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{titling}
+\setlength{\droptitle}{-5em} 
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\graphicspath{{imgs/}}
+\usepackage{hyperref}
+
+% Math stuff
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{bm}
+
+% Code Highlighting
+\usepackage{minted}
+\usemintedstyle{solarizedlight}
+
+\author{Zach Neveu}
+\title{ Day 25 Notes }
+
+\begin{document}
+\maketitle
+
+\section{Agenda}%
+\begin{itemize}
+	\item Min-Cost Flow Networks
+\end{itemize}
+
+\section{Min-Cost Flow Networks}%
+\begin{itemize}
+	\item Extend the idea of a flow network by adding a non-negative cost $d(u,v)$ to each edge
+	\item For each node $v$, $b(v)$ is the net flow generated at v.
+	\item If $b(v) > 0$, then $v$ is a source, if $b(v) < 0$ it's a sink, otherwise it's neither.
+	\item Flow definition:
+	\begin{enumerate}
+		\item $f(u,v) \le c(u,v)$
+		\item $f(u,v) = -f(v,u)$
+		\item For all $u \in V$,  $\sum_{v\in V} f(u,v) - \sum_{v\in V} f(v,u) = b(u)$
+	\end{enumerate}
+	\item Goal: minimize  $\sum_{u,v \in V} f(u,v)*d(u,v)$
+	\item A flow is given, goal is to find cheapest way to make this happen
+	\item Necessary condition for a flow: $\sum_{v \in V} b(v) = 0$
+	\item This condition does \underline{NOT} mean that a flow exists that is legal
+	\item To find a legal flow, we must solve the decision version of the max flow problem
+	\item To solve this, add single s, t with capacities = b() values
+	\item Solve the max flow problem
+	\item Max-flow is a special case of min-cost flow. To solve max-flow using min-cost-flow solver:
+	\item Set source to large positive b, sink to very negative b
+	\item Add extra path from source->sink with huge cost
+\end{itemize}
+
+\subsection*{Big Idea 2}
+\begin{itemize}
+	\item Given an expensive, but legal flow, how to make cheaper?
+	\item Augmenting flow around a cycle does not change the net flow anywhere.
+	\item Goal: find a where the sum of the costs is negative
+	\item Add one to flow around this cycle as long as capacities allow
+	\item Keep finding these cycles. When no more cycles exist, min val found.
+\end{itemize}
+
+\end{document}

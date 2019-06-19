@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Ford Fulkerson Algorithm}
+\PYG{k}{def} \PYG{n+nf}{FF}\PYG{p}{(}\PYG{n}{g}\PYG{p}{):}
+    \PYG{n}{flow} \PYG{o}{=} \PYG{l+m+mi}{0}
+    \PYG{k}{while} \PYG{n}{p} \PYG{o}{=} \PYG{n}{is\PYGZus{}aug\PYGZus{}path}\PYG{p}{(}\PYG{n}{source}\PYG{p}{,}\PYG{n}{sink}\PYG{p}{):}
+        \PYG{n}{cfp} \PYG{o}{=} \PYG{n}{residual\PYGZus{}capacity}\PYG{p}{(}\PYG{n}{p}\PYG{p}{)}
+        \PYG{n}{flow} \PYG{o}{+=} \PYG{n}{cfp}
+\end{Verbatim}
